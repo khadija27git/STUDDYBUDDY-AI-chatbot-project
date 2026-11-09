@@ -32,7 +32,7 @@ Python, Flask, SQLite, Google Gemini API, pypdf, HTML, CSS and JavaScript.
 
 ## Credits
 
-Books courtesy of their authors and publishers. Replace the lines below with the books you include.
+Books courtesy of their authors and publishers. 
 
 | Book | Author | License | Source |
 |------|--------|---------|--------|
