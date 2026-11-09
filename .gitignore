@@ -1,1 +1,8 @@
-
+api.env
+.env
+*.db
+books_cache.json
+__pycache__/
+venv/
+.venv/
+.DS_Store
