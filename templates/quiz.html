@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quiz|StudyBuddy </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="icon"
+          href="{{ url_for('static', filename='1.png') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body id="quizPage">
+
+    <!-- BLURRED BACKGROUND -->
+    <div class="quiz-background"></div>
+
+    <!-- DARK OVERLAY -->
+    <div class="quiz-overlay"></div>
+
+    <!-- NAVIGATION -->
+    <div class="quiz-nav">
+        <button class="quiz-nav-btn" id="quizNavBtn" type="button"
+                aria-label="Open navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="quiz-nav-dropdown" id="quizNavDropdown">
+            <a href="{{ url_for('dashboard_page') }}">Dashboard</a>
+            <a href="{{ url_for('chat_page') }}">AI Chat</a>
+            <a href="{{ url_for('books_page') }}">Books</a>
+            <a href="{{ url_for('quiz_page') }}">Quiz</a>
+            <a href="{{ url_for('notes_page') }}">Notes</a>
+            <a href="{{ url_for('about_page') }}">About Us</a>
+        </div>
+    </div>
+
+    <!-- QUIZ POPUP -->
+    <main class="quiz-modal">
+
+        <!-- BRAND -->
+        <a href="{{ url_for('dashboard_page') }}" class="quiz-brand">
+            <img src="{{ url_for('static', filename='1.png') }}"
+                 alt="StudyBuddy Logo">
+            <span>StudyBuddy</span>
+        </a>
+
+        <!-- PROGRESS -->
+        <div class="quiz-progress">
+            Question <span id="currentQuestion">1</span>
+            of
+            <span id="totalQuestions">5</span>
+        </div>
+
+        <!-- TITLE -->
+        <div class="quiz-heading">
+            <h1>Quiz Yourself</h1>
+            <p>
+                Test your knowledge and see how much you've learned.
+            </p>
+        </div>
+
+        <!-- TOPIC SELECTION -->
+        <section id="quizTopicSection">
+            <form id="quizTopicForm">
+                <label for="quizTopic">Enter your quiz topic</label>
+
+                <input
+                    type="text"
+                    id="quizTopic"
+                    name="topic"
+                    placeholder="e.g. Pointers in C, SQL Joins..."
+                    required
+                    maxlength="150"
+                    autocomplete="off"
+                >
+
+                <button type="submit" id="generateQuiz">
+                    Generate 5 Questions
+                </button>
+
+                <p id="quizError" role="alert" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <!-- QUESTION CARD -->
+        <section class="quiz-card" style="display: none;">
+
+            <h2 id="questionText"></h2>
+
+            <div id="optionsContainer" class="quiz-options"></div>
+
+            <div class="quiz-actions">
+                <button
+                    type="button"
+                    id="nextQuestion"
+                    class="next-question"
+                    disabled
+                >
+                    Next Question
+                </button>
+            </div>
+
+        </section>
+
+        <!-- RESULT -->
+        <section
+            id="quizResult"
+            class="quiz-result"
+            style="display: none;"
+        >
+
+            <div class="result-icon">
+                <i class="fa-solid fa-award"></i>
+            </div>
+
+            <h2>Quiz Complete!</h2>
+
+            <p>Your final score</p>
+
+            <div class="score">
+                <span id="scoreNumber">0</span>
+                /
+                <span id="scoreTotal">5</span>
+            </div>
+
+            <p id="scoreMessage" class="score-message"></p>
+
+            <div class="result-buttons">
+                <button
+                    type="button"
+                    id="retryQuiz"
+                    class="retry-button"
+                >
+                    <i class="fa-solid fa-rotate-right"></i>
+                    Try Again
+                </button>
+
+                <a
+                    href="{{ url_for('dashboard_page') }}"
+                    class="dashboard-button"
+                >
+                    Dashboard
+                </a>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="{{ url_for('static', filename='1.png') }}"
+                         alt="StudyBuddy Logo">
+                    <span>StudyBuddy</span>
+                </div>
+
+                <p>
+                    Your AI-powered study companion.
+                    Learn, understand and grow one concept at a time.
+                </p>
+            </div>
+
+            <div class="footer-links">
+
+                <div>
+                    <h4>Study</h4>
+                    <a href="{{ url_for('chat_page') }}">AI Chat</a>
+                    <a href="{{ url_for('books_page') }}">Books</a>
+                    <a href="{{ url_for('quiz_page') }}">Quiz</a>
+                    <a href="{{ url_for('notes_page') }}">Notes</a>
+                </div>
+
+                <div>
+                    <h4>Focus</h4>
+                    <a href="{{ url_for('timer_page') }}">Focus Timer</a>
+                    <a href="{{ url_for('about_page') }}">About Us</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 StudyBuddy</span>
+
+            <span>
+                Created by Khadija Choudhary
+                SYIT
+            </span>
+        </div>
+
+    </footer>
+
+    <!-- LOAD SHARED JAVASCRIPT ONCE -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

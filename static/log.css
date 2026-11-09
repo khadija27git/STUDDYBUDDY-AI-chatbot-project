@@ -1,0 +1,204 @@
+
+/* =========================================
+   STUDYBUDDY LOGIN PAGE
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.login-page {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background:
+        linear-gradient(
+            rgba(32, 29, 26, 0.30),
+            rgba(32, 29, 26, 0.45)
+        ),
+        url("bg.jpg") center / cover no-repeat fixed;
+    color: #342d27;
+}
+
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 18px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 38px 35px;
+    background: rgba(255, 252, 246, 0.97);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
+    text-align: center;
+}
+
+.login-brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 28px;
+    color: #342d27;
+    text-decoration: none;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.login-brand img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+}
+
+.login-eyebrow {
+    margin-bottom: 12px;
+    color: #917658;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+}
+
+.login-card h1 {
+    margin-bottom: 12px;
+    font-family: Georgia, serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: #352c25;
+}
+
+.login-description {
+    margin-bottom: 28px;
+    color: #81776d;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.login-field {
+    margin-bottom: 19px;
+    text-align: left;
+}
+
+.login-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #51463b;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.login-field input {
+    display: block;
+    width: 100%;
+    height: 46px;
+    padding: 0 13px;
+    border: 1px solid #ded4c7;
+    border-radius: 9px;
+    outline: none;
+    background: #fffefa;
+    color: #342d27;
+    font-family: inherit;
+    font-size: 13px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-field input:focus {
+    border-color: #9a8064;
+    box-shadow: 0 0 0 3px rgba(154, 128, 100, 0.13);
+}
+
+.login-field input::placeholder {
+    color: #aaa198;
+}
+
+.login-submit {
+    width: 100%;
+    min-height: 46px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 9px;
+    background: #39312b;
+    color: #fffaf2;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.login-submit:hover {
+    background: #594738;
+}
+
+.login-footer {
+    margin-top: 24px;
+    color: #8b7d6e;
+    font-size: 12px;
+}
+
+.login-back {
+    display: inline-block;
+    margin-top: 18px;
+    color: #75604b;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.login-back:hover {
+    text-decoration: underline;
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+    .login-wrapper {
+        padding: 18px;
+    }
+
+    .login-card {
+        padding: 30px 23px;
+        border-radius: 16px;
+    }
+
+    .login-card h1 {
+        font-size: 31px;
+    }
+}
+
+/* Login and signup links */
+.login-description a {
+    color: #76543f;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-description a:hover {
+    text-decoration: underline;
+}
+
+/* Form feedback */
+.login-message {
+    padding: 10px 12px;
+    margin: 12px 0;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.login-message.error {
+    color: #8a2929;
+    background: #f9e8e5;
+}
+
+.login-message.success {
+    color: #315c43;
+    background: #e8f2e9;
+}

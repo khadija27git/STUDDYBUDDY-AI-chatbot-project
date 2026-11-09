@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | StudyBuddy</title>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+      <!-- <link rel="stylesheet" href="C:/practice/dsa/field project/static/style.css"> -->
+
+
+         <link rel="icon"
+          type="image/png"
+          href="{{ url_for('static', filename='1.png') }}">
+    <!-- <link rel="img/icon" src="{{ url_for('static', filename='1.png') }}" alt="StudyBuddy"> -->
+    <!-- <link rel="icon" href="C:/practice/dsa/field project/static/1.png"> -->
+</head>
+
+
+<body class="about-page">
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <nav class="topnav">
+    <a class="brand" href="{{ url_for('dashboard_page') }}">
+        <!-- <img src="C:/practice/dsa/field project/static/1.png" alt="StudyBuddy Logo" class="brand-logo"> -->
+       <img src="{{ url_for('static', filename='1.png') }}"
+                 alt="StudyBuddy Logo">
+        <span> StudyBuddy</span></a>
+        <div class="navlinks">
+            <a href="{{ url_for('chat_page') }}">Chat</a>
+            <a href="{{ url_for('timer_page') }}">Timer</a>
+            <a href="{{url_for('books_page')}}">Books</a>
+            <a href="{{url_for('about_page')}}">About Us</a>
+        </div>
+        <div class="nav-actions">
+        <!-- <a class="nav-cta" href="chat.html">Start Chat</a> -->
+        
+        {% if session.get('user_id') %}
+            <a href="{{ url_for('logout') }}" class="login-btn">
+                Logout
+            </a>
+        {% else %}
+            <a href="{{ url_for('login_page') }}" class="login-btn">
+                Login / Sign Up
+            </a>
+        {% endif %}
+        </div></nav>
+    <!-- =========================
+         ABOUT HERO
+    ========================== -->
+
+    <main class="about-main">
+
+        <section class="about-showcase">
+
+
+
+            
+            <!-- LARGE IMAGE -->
+
+            <div class="about-large-image">
+
+                <!-- <img src="C:/practice/dsa/field project/static/bg.jpg" alt="StudyBuddy learning environment"> -->
+                   <!-- <img src="{{ url_for('static', filename='bg.jpg') }}"
+                 alt="StudyBuddy bg"> -->
+                <div class="about-image-overlay">
+
+                    <span>LEARN WITH PURPOSE</span>
+
+                    <h1>
+                        ABOUT<br>
+                        STUDYBUDDY
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="about-side">
+
+
+                <!-- SMALL LOGO -->
+
+                <div class="about-logo-card">
+
+                    <!-- <img src="C:/practice/dsa/field project/static/1.png" alt="StudyBuddy Logo"> -->
+                       <img src="{{ url_for('static', filename='1.png') }}"
+                 alt="StudyBuddy Logo">
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="about-description">
+
+                    <span class="about-eyebrow">
+                        A BETTER WAY TO STUDY
+                    </span>
+
+                    <h2>
+                        Learning becomes<br>
+                        easier when you<br>
+                        have a companion.
+                    </h2>
+
+                    <p>
+                        StudyBuddy is designed to make everyday
+                        learning feel simpler, calmer and more
+                        organised.
+                    </p>
+
+                    <p>
+                        From understanding difficult concepts to
+                        revising with quizzes, keeping notes and
+                        staying focused, everything you need to
+                        study can live in one place.
+                    </p>
+
+                </div>
+
+
+                <!-- SMALL DEMO TEXT -->
+
+                <div class="about-small-text">
+
+                    <p>
+                        Built for students who want to
+                        understand, not just memorise.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- LOWER INTRO -->
+
+        <section class="about-intro">
+
+            <span>OUR APPROACH</span>
+
+            <p>
+                We believe studying should feel less overwhelming
+                and more intentional. StudyBuddy brings together
+                the tools students use every day into one simple
+                learning space.
+            </p>
+
+        </section>
+
+    </main>
+
+
+   <footer class="footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    <img src="{{ url_for('static', filename='1.png') }}"
+                         alt="StudyBuddy Logo">
+                    <span>StudyBuddy</span>
+                </div>
+
+                <p>
+                    Your AI-powered study companion.
+                    Learn, understand and grow one concept at a time.
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <div>
+                    <h4>Study</h4>
+                    <a href="{{ url_for('chat_page') }}">AI Chat</a>
+                    <a href="{{ url_for('books_page') }}">Books</a>
+                    <a href="{{ url_for('notes_page') }}">Notes</a>
+                </div>
+
+                <div>
+                    <h4>Focus</h4>
+                    <a href="{{ url_for('timer_page') }}">Focus Timer</a>
+                    
+                    <a href="{{ url_for('about_page') }}"></a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 StudyBuddy</span>
+            <span>Created by Khadija Choudhary — SYIT</span>
+        </div>
+
+    </footer>
+
+</div>
+
+<!-- LOAD JAVASCRIPT ONCE -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

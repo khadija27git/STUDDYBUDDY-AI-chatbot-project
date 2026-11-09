@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | StudyBuddy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='log.css') }}">
+
+    <link rel="icon"
+          href="{{ url_for('static', filename='1.png') }}">
+</head>
+
+<body class="login-page">
+
+    <main class="login-wrapper">
+
+        <section class="login-card">
+
+            <a class="login-brand"
+               href="{{ url_for('dashboard_page') }}">
+                <img src="{{ url_for('static', filename='1.png') }}"
+                     alt="StudyBuddy Logo">
+                <span>StudyBuddy</span>
+            </a>
+
+            <p class="login-eyebrow">YOUR AI STUDY COMPANION</p>
+
+            <h1>Welcome back.</h1>
+
+            <p class="login-description">
+                Sign in and continue your learning journey.
+            </p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                    <p class="login-message {{ category }}" role="alert">
+                        {{ message }}
+                    </p>
+                {% endfor %}
+            {% endwith %}
+
+            <form action="{{ url_for('login_page') }}" method="POST">
+
+                <div class="login-field">
+                    <label for="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required>
+                </div>
+
+                <div class="login-field">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required>
+                </div>
+
+                <button type="submit" class="login-submit">
+                    Sign In
+                </button>
+
+            </form>
+
+            <p class="login-description">
+                New to StudyBuddy?
+                <a href="{{ url_for('signup_page') }}">Create an account</a>
+            </p>
+
+            <p class="login-footer">
+                Learn one concept at a time ✦
+            </p>
+
+            <a class="login-back"
+               href="{{ url_for('dashboard_page') }}">
+                ← Back to StudyBuddy
+            </a>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

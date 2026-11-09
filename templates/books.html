@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Books|StudyBuddy </title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="icon"
+          type="image/png"
+          href="{{ url_for('static', filename='1.png') }}">
+</head>
+
+<body>
+
+    <main class="books">
+
+        <!-- BOOK PAGE HEADER -->
+        <div class="books-top">
+
+            <div class="sidelogohaha">
+                <a href="{{ url_for('dashboard_page') }}" class="books-brand">
+                    <img src="{{ url_for('static', filename='1.png') }}"
+                         alt="StudyBuddy Logo">
+                    <span>StudyBuddy</span>
+                </a>
+            </div>
+
+            <div>
+                <h1>My Study Library</h1>
+                <p>Reference books available in StudyBuddy.</p>
+            </div>
+
+            <div class="book-search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input
+                    class="booksearch"
+                    id="bookSearch"
+                    type="text"
+                    placeholder="Search books..."
+                >
+            </div>
+
+        </div>
+
+        <!-- CURRENTLY STUDYING -->
+        <section class="shelf">
+
+            <h3>Currently studying</h3>
+
+            <div class="bookrow">
+
+                <div class="book"
+                     onclick="pick('Fundamentals of Database Systems')">
+
+                    <div class="cover">
+                        <b>
+                            DATABASE<br>
+                            SYSTEMS
+                        </b>
+
+                        <small>Elmasri &amp; Navathe</small>
+                    </div>
+
+                    <div class="bookname">
+                        Fundamentals of Database Systems
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="shelfline"></div>
+
+        </section>
+
+        <!-- AVAILABLE REFERENCE BOOKS -->
+        <section class="shelf">
+
+            <h3>Available reference books</h3>
+
+            <p id="bookCount">Loading your library...</p>
+
+            <div class="bookrow" id="bookGrid">
+                <!-- PDF cards will be generated automatically -->
+            </div>
+
+            <div class="shelfline"></div>
+
+            <div class="book-selection-actions">
+
+                <span id="selectedCount">0 books selected</span>
+
+                <button type="button" id="useSelectedBooks">
+                    <i class="fa-solid fa-book-open"></i>
+                    Use selected books in Chat
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    <img src="{{ url_for('static', filename='1.png') }}"
+                         alt="StudyBuddy Logo">
+                    <span>StudyBuddy</span>
+                </div>
+
+                <p>
+                    Your AI-powered study companion.
+                    Learn, understand and grow one concept at a time.
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <div>
+                    <h4>Study</h4>
+
+                    <a href="{{ url_for('chat_page') }}">AI Chat</a>
+                    <a href="{{ url_for('books_page') }}">Books</a>
+                    <a href="{{ url_for('quiz_page') }}">Quiz</a>
+                    <a href="{{ url_for('notes_page') }}">Notes</a>
+                </div>
+
+                <div>
+                    <h4>Focus</h4>
+
+                    <a href="{{ url_for('timer_page') }}">Focus Timer</a>
+                    <a href="{{ url_for('about_page') }}">About Us</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <span>© 2026 StudyBuddy</span>
+
+            <span>Created by Khadija Choudhary — SYIT</span>
+
+        </div>
+
+    </footer>
+
+    <!-- LOAD EACH SCRIPT ONLY ONCE -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

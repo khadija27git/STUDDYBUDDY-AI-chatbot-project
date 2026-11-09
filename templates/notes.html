@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notes | StudyBuddy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="icon"
+          type="image/png"
+          href="{{ url_for('static', filename='1.png') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="notes-page">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <a href="{{ url_for('dashboard_page') }}" class="brand">
+            <img src="{{ url_for('static', filename='1.png') }}"
+                 alt="StudyBuddy Logo">
+            <span>StudyBuddy</span>
+        </a>
+
+        <nav class="nav">
+
+            <a href="{{ url_for('dashboard_page') }}">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="{{ url_for('timer_page') }}">
+                <i class="fa-solid fa-clock"></i>
+                <span>Timer</span>
+            </a>
+
+            <a href="{{ url_for('books_page') }}">
+                <i class="fa-solid fa-book"></i>
+                <span>Books</span>
+            </a>
+
+            <a href="{{ url_for('chat_page') }}">
+                <i class="fa-solid fa-robot"></i>
+                <span>Chats</span>
+            </a>
+
+            <a href="{{ url_for('quiz_page') }}">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Quiz</span>
+            </a>
+
+
+            <a href="{{ url_for('notes_page') }}" class="active">
+                <i class="fa-solid fa-note-sticky"></i>
+                <span>Notes</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="notes-main">
+        <button
+    type="button"
+    class="mobile-menu-toggle"
+    id="mobileMenuToggle"
+    aria-label="Open navigation menu"
+    aria-expanded="false">
+    <i class="fa-solid fa-bars"></i>
+</button>
+
+        <div class="notes-header">
+
+            <div>
+                <h1>My Notes</h1>
+                <p class="notes-subtitle">
+                    Keep your thoughts, ideas and study notes in one place.
+                </p>
+            </div>
+
+            <div class="notes-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input
+                    type="text"
+                    id="searchNotes"
+                    placeholder="Search notes..."
+                >
+            </div>
+
+        </div>
+
+        <!-- NOTES CONTAINER -->
+        <section class="notes-container" id="notesContainer">
+        </section>
+
+        <!-- NEW NOTE BUTTON -->
+        <button type="button" class="new-note-btn" id="newNoteBtn">
+            <i class="fa-solid fa-plus"></i>
+            New Note
+        </button>
+
+    </main>
+
+    <!-- NOTE EDITOR -->
+    <div class="editor-overlay" id="editorOverlay">
+
+        <div class="note-editor">
+
+            <button type="button" class="close-editor" id="closeEditor">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <input
+                type="text"
+                id="noteTitle"
+                class="note-title"
+                placeholder="Note title..."
+            >
+
+            <textarea
+                id="noteContent"
+                class="note-content"
+                placeholder="Start writing..."
+            ></textarea>
+
+            <div class="editor-footer">
+                <span id="saveStatus">Autosaved</span>
+
+                <button type="button" class="delete-note" id="deleteNote">
+                    <i class="fa-solid fa-trash"></i>
+                    Delete
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    <img src="{{ url_for('static', filename='1.png') }}"
+                         alt="StudyBuddy Logo">
+                    <span>StudyBuddy</span>
+                </div>
+
+                <p>
+                    Your AI-powered study companion.
+                    Learn, understand and grow one concept at a time.
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <div>
+                    <h4>Study</h4>
+                    <a href="{{ url_for('chat_page') }}">AI Chat</a>
+                    <a href="{{ url_for('books_page') }}">Books</a>
+                    <a href="{{ url_for('notes_page') }}">Notes</a>
+                </div>
+
+                <div>
+                    <h4>Focus</h4>
+                    <a href="{{ url_for('timer_page') }}">Focus Timer</a>
+                    <h4> About US</h4>
+                    <a href="{{ url_for('about_page') }}">Focus Timer</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 StudyBuddy</span>
+            <span>Created by Khadija Choudhary — SYIT</span>
+        </div>
+
+    </footer>
+
+</div>
+
+<!-- LOAD JAVASCRIPT ONCE -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

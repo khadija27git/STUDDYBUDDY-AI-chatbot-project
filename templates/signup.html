@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up | StudyBuddy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='log.css') }}">
+
+    <link rel="icon"
+          href="{{ url_for('static', filename='1.png') }}">
+</head>
+
+<body class="login-page">
+
+    <main class="login-wrapper">
+
+        <section class="login-card">
+
+            <a class="login-brand"
+               href="{{ url_for('dashboard_page') }}">
+                <img src="{{ url_for('static', filename='1.png') }}"
+                     alt="StudyBuddy Logo">
+                <span>StudyBuddy</span>
+            </a>
+
+            <p class="login-eyebrow">YOUR AI STUDY COMPANION</p>
+
+            <h1>Join StudyBuddy.</h1>
+
+            <p class="login-description">
+                Create your account and begin your learning journey.
+            </p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                    <p class="login-message {{ category }}" role="alert">
+                        {{ message }}
+                    </p>
+                {% endfor %}
+            {% endwith %}
+
+            <form action="{{ url_for('signup_page') }}" method="POST">
+
+                <div class="login-field">
+                    <label for="username">Choose a username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="3–30 characters"
+                        minlength="3"
+                        maxlength="30"
+                        pattern="[A-Za-z0-9_]+"
+                        autocomplete="username"
+                        required>
+                </div>
+
+                <div class="login-field">
+                    <label for="password">Create a password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="At least 8 characters"
+                        minlength="8"
+                        maxlength="128"
+                        autocomplete="new-password"
+                        required>
+                </div>
+
+                <div class="login-field">
+                    <label for="confirm_password">Confirm password</label>
+                    <input
+                        type="password"
+                        id="confirm_password"
+                        name="confirm_password"
+                        placeholder="Enter your password again"
+                        minlength="8"
+                        maxlength="128"
+                        autocomplete="new-password"
+                        required>
+                </div>
+
+                <button type="submit" class="login-submit">
+                    Create Account
+                </button>
+
+            </form>
+
+            <p class="login-description">
+                Already have an account?
+                <a href="{{ url_for('login_page') }}">Sign in</a>
+            </p>
+
+            <p class="login-footer">
+                Your learning journey starts here ✦
+            </p>
+
+            <a class="login-back"
+               href="{{ url_for('dashboard_page') }}">
+                ← Back to StudyBuddy
+            </a>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

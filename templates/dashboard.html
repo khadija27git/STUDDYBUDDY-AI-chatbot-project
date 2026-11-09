@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyBuddy | Your AI Study Companion</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="icon"
+          href="{{ url_for('static', filename='1.png') }}">
+</head>
+
+<body>
+
+    <!-- HERO / NAVBAR -->
+    <section class="hero">
+
+        <nav class="topnav">
+
+            <a class="brand" href="/">
+                <img src="{{ url_for('static', filename='1.png') }}"
+                     alt="StudyBuddy Logo">
+                <span>StudyBuddy</span>
+            </a>
+
+            <div class="navlinks">
+                <a href="{{ url_for('chat_page') }}">Chat</a>
+                <a href="{{ url_for('timer_page') }}">Timer</a>
+                <a href="{{ url_for('books_page') }}">Books</a>
+                <a href="{{ url_for('about_page') }}">About Us</a>
+            </div>
+
+         
+
+                {% if session.get('user_id') %}
+            <a href="{{ url_for('logout') }}" class="login-btn">
+                Logout
+            </a>
+        {% else %}
+            <a href="{{ url_for('login_page') }}" class="login-btn">
+                Login / Sign Up
+            </a>
+        {% endif %}
+
+        </nav>
+
+        <!-- HERO CONTENT -->
+        <div class="copy">
+
+            <div class="eyebrow">
+                ✦ AI STUDY COMPANION
+            </div>
+
+            <h1>Let's decode,<br>and understand.</h1>
+
+            <p>
+                StudyBuddy brings AI chat, reference books, quizzes,
+                notes and focused study sessions into one study space.
+            </p>
+
+            <a class="primary"
+               href="{{ url_for('chat_page') }}">
+                Start Chat
+            </a>
+
+        </div>
+
+        <div class="quote">
+            Learn one concept at a time ✦
+        </div>
+
+    </section>
+
+
+    <!-- STUDY TOOLS -->
+    <section class="section">
+
+        <div class="heading">
+
+            <h2>Everything you need to study.</h2>
+
+            <p>
+                Choose a tool and continue your study session
+                without leaving your workspace.
+            </p>
+
+        </div>
+
+        <div class="grid">
+
+            <a class="card"
+               href="{{ url_for('chat_page') }}">
+
+                <div class="icon">
+                    <i class="fa-solid fa-comments"></i>
+                </div>
+
+                <h3>AI Chat</h3>
+
+                <p>
+                    Ask StudyBuddy to explain concepts
+                    and answer questions.
+                </p>
+
+            </a>
+
+
+            <a class="card"
+               href="{{ url_for('books_page') }}">
+
+                <div class="icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <h3>Reference Books</h3>
+
+                <p>
+                    Access the reference books provided
+                    by the developer.
+                </p>
+
+            </a>
+
+
+            <!-- Keep the existing quiz page until its Flask route is confirmed -->
+            <a class="card" href="{{ url_for('quiz_page') }}">
+
+                <div class="icon">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+
+                <h3>Quiz</h3>
+
+                <p>
+                    Test your understanding with
+                    topic-based practice.
+                </p>
+
+            </a>
+
+
+            <a class="card"
+               href="{{ url_for('notes_page') }}">
+
+                <div class="icon">
+                    <i class="fa-solid fa-note-sticky"></i>
+                </div>
+
+                <h3>Make Notes</h3>
+
+                <p>
+                    Create and save your own study notes.
+                </p>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+
+                    <img src="{{ url_for('static', filename='1.png') }}"
+                         alt="StudyBuddy Logo">
+
+                    <span>StudyBuddy</span>
+
+                </div>
+
+                <p>
+                    Your AI-powered study companion.
+                    Learn, understand and grow one concept at a time.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <div>
+                    <h4>Study</h4>
+
+                    <a href="{{ url_for('chat_page') }}">AI Chat</a>
+
+                    <a href="{{ url_for('books_page') }}">Books</a>
+
+                    <a href="{{ url_for('notes_page') }}">Notes</a>
+                </div>
+
+
+                <div>
+                    <h4>Focus</h4>
+
+                    <a href="{{ url_for('timer_page') }}">Focus Timer</a>
+
+                    <a href="{{ url_for('about_page') }}">About Us</a>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>© 2026 StudyBuddy</span>
+
+            <span>Created by Khadija Choudhary — SYIT</span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

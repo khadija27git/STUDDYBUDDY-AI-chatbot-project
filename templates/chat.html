@@ -1,0 +1,689 @@
+<!--  Claude
+
+Chat · HTML 
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <title>Chat | StudyBuddy</title>
+ 
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+ 
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+ 
+    <link rel="icon"
+          type="image/png"
+          href="{{ url_for('static', filename='1.png') }}">
+ 
+    <style>
+        .book-picker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+            font-size: 14px;
+        }
+ 
+        .book-picker select {
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            background: #fff;
+            font: inherit;
+            max-width: 260px;
+            cursor: pointer;
+        }
+ 
+        .chat-toolbar .book-picker {
+            margin-top: 0;
+        }
+    </style>
+</head>
+ 
+ 
+<body class="chat-page">
+ 
+     =====================================================
+         MAIN NAVIGATION
+    ====================================================== 
+ 
+    <nav class="topnav">
+        <a class="brand" href="{{ url_for('dashboard_page') }}">
+            <img src="{{ url_for('static', filename='1.png') }}"
+                 alt="StudyBuddy Logo">
+            <span> StudyBuddy</span>
+        </a>
+ 
+        <div class="navlinks">
+            <a href="{{ url_for('chat_page') }}">Chat</a>
+            <a href="{{ url_for('timer_page') }}">Timer</a>
+            <a href="{{ url_for('books_page') }}">Books</a>
+            <a href="{{ url_for('about_page') }}">About Us</a>
+        </div>
+ 
+        {% if session.get('user_id') %}
+            <a href="{{ url_for('logout') }}" class="login-btn">
+                Logout
+            </a>
+        {% else %}
+            <a href="{{ url_for('login_page') }}" class="login-btn">
+                Login / Sign Up
+            </a>
+        {% endif %}
+    </nav>
+ 
+     =====================================================
+         CHAT
+    ====================================================== 
+ 
+    <main class="chat-container">
+ 
+        LANDING STATE 
+ 
+        <section class="chat-landing" id="chatLanding">
+ 
+            <div class="chat-landing-content">
+ 
+                <div class="chat-eyebrow">
+                    YOUR AI STUDY COMPANION
+                </div>
+ 
+                <h1>
+                    What can I help you<br>
+                    study today?
+                </h1>
+ 
+                <p class="chat-subtitle">
+                    Ask questions, understand concepts,
+                    revise topics or clear a quick doubt.
+                </p>
+ 
+                <MAIN PROMPT 
+ 
+                <div class="chat-prompt-box">
+ 
+                    <textarea
+                        id="chatInput"
+                        placeholder="Ask StudyBuddy anything..."
+                        rows="1"
+                    ></textarea>
+ 
+                    <div class="chat-prompt-actions">
+ 
+                        <button
+                            class="chat-attach-btn"
+                            title="Attach"
+                            type="button"
+                        >
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+ 
+                        <button
+                            class="chat-send-btn"
+                            id="chatSendBtn"
+                            title="Send"
+                            type="button"
+                        >
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </button>
+ 
+                    </div>
+ 
+                </div>
+ 
+                 BOOK PICKER (landing) 
+ 
+                <!-- <div class="book-picker">
+                    <i class="fa-solid fa-book"></i>
+                    <select class="book-select" aria-label="Answer from book">
+                        <option value="">General answer (no book)</option>
+                    </select>
+                </div>
+ 
+                <br> 
+ 
+                <SAVED CHAT 
+ 
+                <button
+                    class="chat-saved-btn"
+                    id="savedChatsBtn"
+                    type="button"
+                >
+                    <i class="fa-regular fa-clock"></i>
+                    Saved chats
+                </button>
+ 
+            </div>
+ 
+        </section>
+ 
+ 
+         ACTIVE CONVERSATION 
+ 
+        <section class="chat-active" id="chatActive">
+ 
+             CHAT TOOLBAR 
+ 
+            <div class="chat-toolbar">
+ 
+                <button
+                    class="chat-new-btn"
+                    id="newChatBtn"
+                    type="button"
+                >
+                    <i class="fa-solid fa-plus"></i>
+                    New Chat
+                </button>
+ 
+                 BOOK PICKER (active chat) 
+ 
+                 <div class="book-picker">
+                    <i class="fa-solid fa-book"></i>
+                    <select class="book-select" aria-label="Answer from book">
+                        <option value="">General answer (no book)</option>
+                    </select>
+                </div> 
+ 
+                <button
+                    class="chat-saved-btn"
+                    id="activeSavedBtn"
+                    type="button"
+                >
+                    <i class="fa-regular fa-clock"></i>
+                    Saved chats
+                </button>
+ 
+            </div>
+ 
+             MESSAGES 
+ 
+            <div
+                class="chat-messages"
+                id="chatMessages"
+            ></div>
+ 
+            BOTTOM INPUT
+ 
+            <div class="chat-input-area">
+ 
+                <div class="chat-input-box">
+ 
+                    <button
+                        class="chat-attach-btn"
+                        title="Attach"
+                        type="button"
+                    >
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+ 
+                    <input
+                        type="text"
+                        id="chatActiveInput"
+                        placeholder="Type your message..."
+                        autocomplete="off"
+                    >
+ 
+                    <button
+                        class="chat-send-btn"
+                        id="chatActiveSend"
+                        title="Send"
+                        type="button"
+                    >
+                        <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+ 
+                </div>
+ 
+            </div>
+ 
+        </section>
+ 
+    </main>
+ 
+ 
+   =====================================================
+         SAVED CHATS PANEL
+    ====================================================== 
+ 
+    <div
+        class="saved-chat-panel"
+        id="savedChatPanel"
+    >
+ 
+        <div class="saved-panel-header">
+ 
+            <h3>Saved Chats</h3>
+ 
+            <button
+                id="closeSavedChats"
+                type="button"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+ 
+        </div>
+ 
+        <div class="saved-panel-list">
+ 
+            <button>
+                Normalization
+            </button>
+ 
+            <button>
+                C pointers
+            </button>
+ 
+            <button>
+                DBMS basics
+            </button>
+ 
+        </div>
+ 
+    </div>
+ 
+ 
+     =====================================================
+         BOOK PICKER LOGIC
+         Fills both dropdowns from /api/books, keeps them in sync,
+         remembers the choice, and adds {"book": "..."} to every
+         POST to /api/chat (so chat.js needs no changes).
+         Must load BEFORE script.js and chat.js.
+    ======================================================
+ 
+     <script>
+    (function () {
+        var KEY = "studybuddy_selected_book";
+        var selects = document.querySelectorAll(".book-select");
+ 
+        function getBook() {
+            try { return localStorage.getItem(KEY) || ""; }
+            catch (e) { return ""; }
+        }
+ 
+        function setBook(value) {
+            try { localStorage.setItem(KEY, value || ""); } catch (e) {}
+            selects.forEach(function (s) { s.value = value || ""; });
+        }
+ 
+        function prettyName(file) {
+            return file.replace(/\.pdf$/i, "").replace(/[_-]+/g, " ");
+        }
+ 
+        fetch("/api/books")
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+                (data.books || []).forEach(function (file) {
+                    selects.forEach(function (select) {
+                        var opt = document.createElement("option");
+                        opt.value = file;
+                        opt.textContent = prettyName(file);
+                        select.appendChild(opt);
+                    });
+                });
+ 
+                // restore saved choice only if that book still exists
+                var saved = getBook();
+                if ((data.books || []).indexOf(saved) === -1) saved = "";
+                setBook(saved);
+            })
+            .catch(function () {});
+ 
+        selects.forEach(function (select) {
+            select.addEventListener("change", function () {
+                setBook(select.value);
+            });
+        });
+ 
+        // Add the selected book to chat requests
+        var originalFetch = window.fetch;
+ 
+        window.fetch = function (input, init) {
+            try {
+                var url = typeof input === "string" ? input : (input && input.url) || "";
+ 
+                if (/\/api\/chat(\?|$)/.test(url) && init && typeof init.body === "string") {
+                    var body = JSON.parse(init.body);
+                    body.book = getBook() || null;
+                    init = Object.assign({}, init, { body: JSON.stringify(body) });
+                }
+            } catch (e) {}
+ 
+            return originalFetch.call(this, input, init);
+        };
+    })();
+    </script> 
+ 
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
+</body>
+ 
+</html>
+  -->
+<!-- Claude
+
+Chat · HTML -->
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <title>Chat | StudyBuddy</title>
+ 
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+ 
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+ 
+    <link rel="icon"
+          type="image/png"
+          href="{{ url_for('static', filename='1.png') }}">
+ 
+    <style>
+        .book-picker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+            font-size: 14px;
+        }
+ 
+        .book-picker select {
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            background: #fff;
+            font: inherit;
+            max-width: 260px;
+            cursor: pointer;
+        }
+ 
+        .selected-books-bar {
+            display: inline-flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            background: #fff;
+            font-size: 14px;
+            max-width: 100%;
+        }
+
+        .selected-books-bar a {
+            font-weight: 600;
+            text-decoration: underline;
+            color: inherit;
+        }
+
+        .chat-toolbar .selected-books-bar {
+            margin-top: 0;
+        }
+
+        .chat-toolbar .book-picker {
+            margin-top: 0;
+        }
+    </style>
+</head>
+ 
+ 
+<body class="chat-page">
+ 
+    <!-- =====================================================
+         MAIN NAVIGATION
+    ====================================================== -->
+ 
+    <nav class="topnav">
+        <a class="brand" href="{{ url_for('dashboard_page') }}">
+            <img src="{{ url_for('static', filename='1.png') }}"
+                 alt="StudyBuddy Logo">
+            <span> StudyBuddy</span>
+        </a>
+ 
+        <div class="navlinks">
+            <a href="{{ url_for('chat_page') }}">Chat</a>
+            <a href="{{ url_for('timer_page') }}">Timer</a>
+            <a href="{{ url_for('books_page') }}">Books</a>
+            <a href="{{ url_for('about_page') }}">About Us</a>
+        </div>
+ 
+        {% if session.get('user_id') %}
+            <a href="{{ url_for('logout') }}" class="login-btn">
+                Logout
+            </a>
+        {% else %}
+            <a href="{{ url_for('login_page') }}" class="login-btn">
+                Login / Sign Up
+            </a>
+        {% endif %}
+    </nav>
+ 
+ 
+    <!-- =====================================================
+         CHAT
+    ====================================================== -->
+ 
+    <main class="chat-container">
+ 
+        <!-- LANDING STATE -->
+ 
+        <section class="chat-landing" id="chatLanding">
+ 
+            <div class="chat-landing-content">
+ 
+                <div class="chat-eyebrow">
+                    YOUR AI STUDY COMPANION
+                </div>
+ 
+                <h1>
+                    What can I help you<br>
+                    study today?
+                </h1>
+ 
+                <p class="chat-subtitle">
+                    Ask questions, understand concepts,
+                    revise topics or clear a quick doubt.
+                </p>
+ 
+                <!-- MAIN PROMPT -->
+ 
+                <div class="chat-prompt-box">
+ 
+                    <textarea
+                        id="chatInput"
+                        placeholder="Ask StudyBuddy anything..."
+                        rows="1"
+                    ></textarea>
+ 
+                    <div class="chat-prompt-actions">
+ 
+                        <button
+                            class="chat-attach-btn"
+                            title="Attach"
+                            type="button"
+                        >
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+ 
+                        <button
+                            class="chat-send-btn"
+                            id="chatSendBtn"
+                            title="Send"
+                            type="button"
+                        >
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </button>
+ 
+                    </div>
+ 
+                </div>
+ 
+                <!-- SELECTED BOOKS (landing) -->
+
+                <div class="selected-books-bar"></div>
+
+                <br>
+
+                <!-- BOOK PICKER (landing) -->
+ 
+                <!-- <div class="book-picker">
+                    <i class="fa-solid fa-book"></i>
+                    <select class="book-select" aria-label="Answer from book">
+                        <option value="">General answer (no book)</option>
+                    </select>
+                </div>
+ 
+                <br> -->
+ 
+                <!-- SAVED CHAT -->
+ 
+                <button
+                    class="chat-saved-btn"
+                    id="savedChatsBtn"
+                    type="button"
+                >
+                    <i class="fa-regular fa-clock"></i>
+                    Saved chats
+                </button>
+ 
+            </div>
+ 
+        </section>
+ 
+ 
+        <!-- ACTIVE CONVERSATION -->
+ 
+        <section class="chat-active" id="chatActive">
+ 
+            <!-- CHAT TOOLBAR -->
+ 
+            <div class="chat-toolbar">
+ 
+                <button
+                    class="chat-new-btn"
+                    id="newChatBtn"
+                    type="button"
+                >
+                    <i class="fa-solid fa-plus"></i>
+                    New Chat
+                </button>
+ 
+                <!-- SELECTED BOOKS (active chat) -->
+
+                <div class="selected-books-bar"></div>
+
+               
+ 
+                <button
+                    class="chat-saved-btn"
+                    id="activeSavedBtn"
+                    type="button"
+                >
+                    <i class="fa-regular fa-clock"></i>
+                    Saved chats
+                </button>
+ 
+            </div>
+ 
+            <!-- MESSAGES -->
+ 
+            <div
+                class="chat-messages"
+                id="chatMessages"
+            ></div>
+ 
+            <!-- BOTTOM INPUT -->
+ 
+            <div class="chat-input-area">
+ 
+                <div class="chat-input-box">
+ 
+                    <button
+                        class="chat-attach-btn"
+                        title="Attach"
+                        type="button"
+                    >
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+ 
+                    <input
+                        type="text"
+                        id="chatActiveInput"
+                        placeholder="Type your message..."
+                        autocomplete="off"
+                    >
+ 
+                    <button
+                        class="chat-send-btn"
+                        id="chatActiveSend"
+                        title="Send"
+                        type="button"
+                    >
+                        <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+ 
+                </div>
+ 
+            </div>
+ 
+        </section>
+ 
+    </main>
+ 
+ 
+    <!-- =====================================================
+         SAVED CHATS PANEL
+    ====================================================== -->
+ 
+    <div
+        class="saved-chat-panel"
+        id="savedChatPanel"
+    >
+ 
+        <div class="saved-panel-header">
+ 
+            <h3>Saved Chats</h3>
+ 
+            <button
+                id="closeSavedChats"
+                type="button"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+ 
+        </div>
+ 
+        <div class="saved-panel-list">
+ 
+            <button>
+                Normalization
+            </button>
+ 
+            <button>
+                C pointers
+            </button>
+ 
+            <button>
+                DBMS basics
+            </button>
+ 
+        </div>
+ 
+    </div>
+ 
+ 
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
+</body>
+ 
+</html>

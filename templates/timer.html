@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Timer|StudyBuddy </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="icon"
+          href="{{ url_for('static', filename='1.png') }}">
+</head>
+
+<body>
+
+    <div class="timer">
+
+        <!-- TIMER NAVBAR -->
+        <header class="timerhead">
+
+            <a class="timerbrand"
+               href="{{ url_for('dashboard_page') }}">
+
+                <img src="{{ url_for('static', filename='1.png') }}"
+                     alt="StudyBuddy Logo">
+
+                <span>StudyBuddy</span>
+
+            </a>
+
+            <div class="icons">
+
+                <!-- MUSIC BUTTON -->
+                <button class="iconbtn"
+                        id="musicToggleBtn"
+                        type="button"
+                        aria-label="Open music player">
+
+                    <i class="fa-solid fa-music"></i>
+
+                </button>
+
+                <!-- MUSIC DROPDOWN -->
+                <section class="music-dropdown"
+                         id="musicDropdown"
+                         aria-label="Music player">
+
+                    <p class="music-label">SOUND</p>
+
+                    <div class="ambient-row">
+
+                        <i class="fa-solid fa-music sound-icon"></i>
+
+                        <span>Ambient sound</span>
+
+                        <label class="music-switch">
+
+                            <input type="checkbox"
+                                   id="ambientToggle"
+                                   aria-label="Toggle ambient sound">
+
+                            <span class="music-slider"></span>
+
+                        </label>
+
+                    </div>
+
+                    <div class="ambient-now-playing"
+                         id="ambientControls"
+                         hidden>
+
+                        <i class="fa-regular fa-compact-disc sound-icon"></i>
+
+                        <span id="currentSound">
+                            Thunderstorm Raining
+                        </span>
+
+                        <button class="ambient-next"
+                                id="nextAmbient"
+                                type="button"
+                                aria-label="Next sound">
+
+                            <i class="fa-solid fa-forward-step"></i>
+
+                        </button>
+
+                    </div>
+
+                    <div class="ambient-volume"
+                         id="ambientVolumeRow"
+                         hidden>
+
+                        <i class="fa-solid fa-volume-high sound-icon"></i>
+
+                        <input type="range"
+                               id="musicVolume"
+                               min="0"
+                               max="1"
+                               step="0.05"
+                               value="0.5"
+                               aria-label="Ambient sound volume">
+
+                    </div>
+
+                    <div class="music-divider"></div>
+
+                    <p class="music-label">AMBIENT SOUNDS</p>
+
+                    <div id="ambientTrackList"></div>
+
+                    <!-- KEEP ONLY ONE AUDIO ELEMENT -->
+                    <audio id="ambientAudio"
+                           preload="none"></audio>
+
+                </section>
+
+                <!-- MENU BUTTON -->
+                <button class="iconbtn menu-btn"
+                        type="button"
+                        onclick="toggleMenu()"
+                        aria-label="Open navigation menu">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+            </div>
+
+        </header>
+
+        <!-- NAVIGATION MENU -->
+        <div class="timer-menu" id="timerMenu">
+
+            <a href="{{ url_for('dashboard_page') }}">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('chat_page') }}">
+                <i class="fa-solid fa-comments"></i>
+                AI Chat
+            </a>
+
+            <a href="{{ url_for('books_page') }}">
+                <i class="fa-solid fa-book-open"></i>
+                Books
+            </a>
+
+            <a href="/quiz">
+                <i class="fa-solid fa-circle-question"></i>
+                Quiz
+            </a>
+
+            <a href="{{ url_for('notes_page') }}">
+                <i class="fa-solid fa-note-sticky"></i>
+                Notes
+            </a>
+
+            <a href="{{ url_for('about_page') }}">
+                <i class="fa-solid fa-circle-info"></i>
+                About Us
+            </a>
+
+        </div>
+
+        <!-- TIMER TABS -->
+        <div class="tabs">
+
+            <button class="tab active" id="focusTab" type="button">
+                Focus
+            </button>
+
+            <button class="tab" id="shortBreakTab" type="button">
+                Short Break
+            </button>
+
+            <button class="tab" id="longBreakTab" type="button">
+                Long Break
+            </button>
+
+        </div>
+
+        <!-- TIMER -->
+        <main class="timercenter">
+
+            <div class="ring">
+
+                <div class="number" id="clock">
+                    25:00
+                </div>
+
+                <div class="session">
+                    • Focus session
+                </div>
+
+            </div>
+
+            <div class="timercontrols">
+
+                <button class="start"
+                        id="start"
+                        type="button"
+                        onclick="toggle()">
+
+                    ▶ START
+
+                </button>
+
+                <button class="reset"
+                        type="button"
+                        onclick="reset()"
+                        aria-label="Reset timer">
+
+                    ↻
+
+                </button>
+
+            </div>
+
+            <div class="custom">
+
+                <input id="mins"
+                       type="number"
+                       min="1"
+                       max="180"
+                       placeholder="Minutes">
+
+                <button type="button" onclick="custom()">
+                    Set
+                </button>
+
+            </div>
+
+            <p class="timer-quote">
+                “One small study session can move you closer to understanding.”
+            </p>
+
+        </main>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+
+                    <img src="{{ url_for('static', filename='1.png') }}"
+                         alt="StudyBuddy Logo">
+
+                    <span>StudyBuddy</span>
+
+                </div>
+
+                <p>
+                    Your AI-powered study companion.
+                    Learn, understand and grow one concept at a time.
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <div>
+                    <h4>Study</h4>
+                    <a href="{{ url_for('chat_page') }}">AI Chat</a>
+                    <a href="{{ url_for('books_page') }}">Books</a>
+                    <a href="{{ url_for('notes_page') }}">Notes</a>
+                </div>
+
+                <div>
+                    <h4>Focus</h4>
+                    <a href="{{ url_for('timer_page') }}">Focus Timer</a>
+                    <a href="{{ url_for('about_page') }}">About Us</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <span>© 2026 StudyBuddy</span>
+
+            <span>Created by Khadija Choudhary — SYIT</span>
+
+        </div>
+
+    </footer>
+
+    <!-- LOAD EACH SCRIPT ONLY ONCE -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='audio.js') }}"></script>
+
+</body>
+</html>
