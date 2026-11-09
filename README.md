@@ -30,12 +30,6 @@ Python, Flask, SQLite, Google Gemini API, pypdf, HTML, CSS and JavaScript.
    ```
 6. Open http://127.0.0.1:5000
 
-## Credits
 
-Books courtesy of their authors and publishers. 
-
-| Book | Author | License | Source |
-|------|--------|---------|--------|
-| Book title | Author name | e.g. CC BY 4.0 | link |
 
 Created by Khadija Choudhary, SYIT.
